@@ -7,27 +7,33 @@ const args = process.argv.slice(2);
 
 let executable;
 
-if (process.platform === "darwin") {
+const fs = require("fs");
+
+if (process.platform === "win32") {
+    // Windows: check bin/miniVCS.exe or bin/windows/miniVCS.exe
+    const candidates = [
+        path.join(__dirname, "bin", "miniVCS.exe"),
+        path.join(__dirname, "bin", "windows", "miniVCS.exe"),
+        path.join(__dirname, "bin", "windows", "minivcs.exe"),
+        path.join(__dirname, "miniVCS.exe")
+    ];
+    executable = candidates.find(p => fs.existsSync(p)) || candidates[0];
+} else if (process.platform === "darwin") {
     // macOS
-    executable = path.join(
-        __dirname,
-        "bin",
-        "mac",
-        "miniVCS"
-    );
-} 
-else if (process.platform === "win32") {
-    // Windows
-    executable = path.join(
-        __dirname,
-        "bin",
-        "windows",
-        "miniVCS.exe"
-    );
-} 
-else {
-    console.error("MiniVCS only supports macOS and Windows.");
-    process.exit(1);
+    const candidates = [
+        path.join(__dirname, "bin", "miniVCS"),
+        path.join(__dirname, "bin", "mac", "miniVCS"),
+        path.join(__dirname, "miniVCS")
+    ];
+    executable = candidates.find(p => fs.existsSync(p)) || candidates[0];
+} else {
+    // Linux
+    const candidates = [
+        path.join(__dirname, "bin", "linux", "miniVCS"),
+        path.join(__dirname, "bin", "miniVCS"),
+        path.join(__dirname, "miniVCS")
+    ];
+    executable = candidates.find(p => fs.existsSync(p)) || candidates[0];
 }
 
 const proc = spawn(executable, args, {
