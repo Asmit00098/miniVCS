@@ -2,6 +2,10 @@
   "name": "minivcs",
   "version": "1.0.5",
   "description": "A Lightweight Version Control System in C++ with S3 Remote Support",
+  "scripts": {
+    "test": "powershell -ExecutionPolicy Bypass -File ./run_tests.ps1",
+    "test:sh": "./run_tests.sh"
+  },
   "bin": {
     "minivcs": "./run.js"
   },

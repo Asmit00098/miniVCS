@@ -1,0 +1,61 @@
+# miniVCSignore — files and directories to exclude from staging
+# Syntax: prefix match (path contains the string) or *extension wildcard
+
+# ── VCS internals ─────────────────────────────────────────────
+.miniVCS
+.git
+
+# ── Security — NEVER commit these ─────────────────────────────
+.env
+.env.local
+.env.development
+.env.production
+.env.staging
+.env.test
+secrets.yml
+secrets.yaml
+secrets.json
+*.pem
+*.key
+*.p12
+*.pfx
+id_rsa
+id_dsa
+id_ecdsa
+id_ed25519
+.netrc
+credentials
+
+# ── Dependencies ───────────────────────────────────────────────
+node_modules
+vendor/
+.venv/
+__pycache__/
+*.pyc
+
+# ── Build artifacts ────────────────────────────────────────────
+*.o
+*.obj
+*.a
+*.lib
+*.so
+*.dll
+*.exe
+build/
+dist/
+out/
+target/
+*.class
+*.jar
+
+# ── Editor & OS ───────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# ── Logs ──────────────────────────────────────────────────────
+*.log
+logs/
